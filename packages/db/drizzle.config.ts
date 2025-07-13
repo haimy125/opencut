@@ -1,11 +1,11 @@
-import type { Config } from "drizzle-kit";
 import * as dotenv from "dotenv";
+import type { Config } from "drizzle-kit";
 
-// Load the right env file based on environment
+// Load the correct env file based on NODE_ENV
 if (process.env.NODE_ENV === "production") {
   dotenv.config({ path: ".env.production" });
 } else {
-  dotenv.config({ path: ".env.local" });
+  dotenv.config({ path: ".env" });
 }
 
 if (!process.env.DATABASE_URL) {
@@ -23,4 +23,4 @@ export default {
   },
   out: "./migrations",
   strict: process.env.NODE_ENV === "production",
-} satisfies Config; 
+} satisfies Config;
