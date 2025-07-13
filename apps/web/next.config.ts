@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+  },
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   output: "standalone",
