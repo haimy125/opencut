@@ -1,21 +1,21 @@
 services:
-  db:
-    image: postgres:17
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: opencut
-      POSTGRES_PASSWORD: opencutthegoat
-      POSTGRES_DB: opencut
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5433:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U opencut"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
+  # db:
+  #   image: postgres:17
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: opencut
+  #     POSTGRES_PASSWORD: opencutthegoat
+  #     POSTGRES_DB: opencut
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5433:5432"
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U opencut"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 5
+  #     start_period: 10s
 
   redis:
     image: redis:7-alpine
@@ -55,7 +55,8 @@ services:
       - "3100:3000" # app is running on 3000 so we run this at 3100
     environment:
       - NODE_ENV=production
-      - DATABASE_URL=postgresql://opencut:opencutthegoat@db:5432/opencut
+      # - DATABASE_URL=postgresql://opencut:opencutthegoat@db:5432/opencut
+      - DATABASE_URL=postgresql://neondb_owner:npg_qGv16makrQUz@ep-silent-paper-a1hwt5ec-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
       - BETTER_AUTH_URL=http://localhost:3000
       - BETTER_AUTH_SECRET=your-production-secret-key-here
       - UPSTASH_REDIS_REST_URL=http://serverless-redis-http:80
